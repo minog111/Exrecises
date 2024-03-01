@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+public class Main
+{
+	public static void main(String[] args) {
+	    String scelta = "";
+	    String nomeCliente = "";
+	    String cognomeCliente= "";
+	    String residenza = "";
+	    int eta = 0;
+	    String cestino = "";
+	    int i = 0;
+	    Scanner scanner = new Scanner(System.in);
+	   try {
+	       FileWriter fw =new FileWriter("nomifile.txt");
+	  fw.write("$$$ Report Stalking\n");
+	   
+	    while(!scelta.equals("NO")){
+		System.out.println("Vuoi mettere nome?");
+		System.out.println("Digita SI o NO");
+		scelta = scanner.nextLine().trim().toUpperCase();
+		
+		if(!scelta.equals("NO")){
+		System.out.println("Digita nome cliente");
+		nomeCliente = scanner.nextLine().trim();
+		fw.write(nomeCliente + "\n");
+		System.out.println("Digita cognome cliente");
+		cognomeCliente = scanner.nextLine().trim();
+		fw.write(cognomeCliente + "\n");
+		System.out.println("Digita età cliente");
+		eta = scanner.nextInt();
+		fw.write(eta + "\n");
+		System.out.println("Digita residenza cliente");
+		cestino=scanner.nextLine();
+		residenza = scanner.nextLine().trim();
+		fw.write(residenza + "\n");
+		i++;
+		}
+}
+fw.write("Aggiunti " + i + " clienti");
+fw.close();
+
+} catch(IOException ioe) { ioe.printStackTrace();}// stampa l'eccezione,e te la gestisce senza bloccare il programma
+}
+}
+
+
+
+
+
+
+
