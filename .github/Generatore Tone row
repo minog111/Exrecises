@@ -1,0 +1,71 @@
+package main;
+
+import java.util.*;
+
+public class ToneRowGenerator {
+    public static void main(String[] args) {
+        // Creazione di una lista di numeri casuali da 0 a 11
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers); // Mischia la lista
+
+        // Converti la lista in un array
+        Integer[] toneRow = numbers.toArray(new Integer[0]);
+
+        // Scala di riferimento (scala cromatica)
+        String[] scale = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+
+        // Stampa della serie dodecafonica come note musicali
+        System.out.println("Serie dodecafonica generata come note musicali:");
+        printSeriesAsNotes(toneRow, scale);
+
+        // Inverso della serie dodecafonica
+        Integer[] invertedRow = invertRow(toneRow);
+
+        // Stampa dell'inverso della serie dodecafonica come note musicali
+        System.out.println("\nInverso della serie dodecafonica come note musicali:");
+        printSeriesAsNotes(invertedRow, scale);
+
+        // Retrogrado della serie dodecafonica
+        Integer[] retrogradeRow = retrogradeRow(toneRow);
+
+        // Stampa del retrogrado della serie dodecafonica come note musicali
+        System.out.println("\nRetrogrado della serie dodecafonica come note musicali:");
+        printSeriesAsNotes(retrogradeRow, scale);
+
+        // Retrogrado dell'inverso della serie dodecafonica
+        Integer[] retrogradeInvertedRow = retrogradeRow(invertedRow);
+
+        // Stampa del retrogrado dell'inverso della serie dodecafonica come note musicali
+        System.out.println("\nRetrogrado dell'inverso della serie dodecafonica come note musicali:");
+        printSeriesAsNotes(retrogradeInvertedRow, scale);
+    }
+
+    // Funzione per stampare la serie dodecafonica come note musicali
+    public static void printSeriesAsNotes(Integer[] series, String[] scale) {
+        for (int i = 0; i < 12; i++) {
+            System.out.print(scale[series[i]] + " ");
+        }
+    }
+
+    // Funzione per calcolare l'inverso di una serie dodecafonica
+    public static Integer[] invertRow(Integer[] series) {
+        Integer[] invertedRow = new Integer[12];
+        int firstInterval = series[0];
+        for (int i = 0; i < 12; i++) {
+            invertedRow[i] = (firstInterval - series[i] + 12) % 12;
+        }
+        return invertedRow;
+    }
+
+    // Funzione per calcolare il retrogrado di una serie dodecafonica
+    public static Integer[] retrogradeRow(Integer[] series) {
+        Integer[] retrogradeRow = new Integer[12];
+        for (int i = 0; i < 12; i++) {
+            retrogradeRow[i] = series[11 - i];
+        }
+        return retrogradeRow;
+    }
+}
